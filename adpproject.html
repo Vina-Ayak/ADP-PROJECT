@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Remedy Recommender</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #search-box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    #remedy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .remedy {
+      display: none; /* Initially hidden */
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f7f7f7;
+    }
+    .remedy h3 {
+      margin-top: 0;
+      color: #444;
+    }
+    .image-container {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .image-container img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Home Remedy Recommender</h1>
+
+    <!-- Search Input -->
+    <input 
+      type="text" 
+      id="search-box" 
+      placeholder="Enter your symptom (e.g., headache, stress or type &quot;all&quot;)" 
+      oninput="filterRemedies()" />
+
+    <!-- Remedies -->
+    <div id="remedy-list">
+      <div class="remedy" data-keywords="headache migraine pain fatigue tension">
+        <div class="image-container">
+          <img src="headache.jpg" alt="Headache Remedies">
+        </div>
+        <h3>Headache Remedies</h3>
+        <p>Stay hydrated, rest in a dark and quiet room, or apply a cold compress to your forehead. Massaging your temples with peppermint or lavender oil can also help alleviate tension headaches.
+        </p>
+      </div>
+      <div class="remedy" data-keywords="cold cough sore throat congestion runny nose">
+        <div class="image-container">
+          <img src="cold.jpg" alt="Cold Remedies">
+        </div>
+        <h3>Cold Remedies</h3>
+        <p>Drink warm fluids like ginger tea or chicken soup. Inhaling steam infused with eucalyptus oil can relieve congestion. Gargle with warm salt water to soothe a sore throat.</p>
+      </div>
+      <div class="remedy" data-keywords="stomachache stomach pain indigestion bloating cramps">
+        <div class="image-container">
+          <img src="stomachache.jpg" alt="Stomachache Remedies">
+        </div>
+        <h3>Stomachache Remedies</h3>
+        <p>Drink chamomile or peppermint tea to relax the stomach muscles. Ginger, either as tea or in small pieces, helps with digestion and reduces nausea.</p>
+      </div>
+      <div class="remedy" data-keywords="stress anxiety fatigue restlessness">
+        <div class="image-container">
+          <img src="stress.png" alt="Stress Remedies">
+        </div>
+        <h3>Stress Remedies</h3>
+        <p>Practice deep breathing or meditation to calm your mind. Drink herbal teas like chamomile or green tea. Physical activity, such as a short walk, can also help reduce stress levels.</p>
+      </div>
+      <div class="remedy" data-keywords="back pain soreness stiffness posture">
+        <div class="image-container">
+          <img src="backpain.png" alt="Back Pain Remedies">
+        </div>
+        <h3>Back Pain Remedies</h3>
+        <p>Apply a heating pad or an ice pack to the affected area for 15-20 minutes. Gentle stretching exercises and improving your posture can help alleviate chronic back pain.</p>
+      </div>
+      <div class="remedy" data-keywords="allergies sneezing itchy eyes congestion">
+        <div class="image-container">
+          <img src="allergy.jpg" alt="Allergy Remedies">
+        </div>
+        <h3>Allergy Remedies</h3>
+        <p>Use a saline nasal spray to flush out allergens from your nasal passages. Local honey may help build immunity to pollen over time. Keep windows closed during high-pollen days.</p>
+      </div>
+      <div class="remedy" data-keywords="dry skin irritation eczema moisturizing">
+        <div class="image-container">
+          <img src="dryskin.jpg" alt="Dry Skin Remedies">
+        </div>
+        <h3>Dry Skin Remedies</h3>
+        <p>Apply coconut oil or aloe vera gel to moisturize the skin. Avoid hot showers, and use a humidifier if the air is dry.</p>
+      </div>
+      <div class="remedy" data-keywords="nausea vomiting motion sickness queasiness">
+        <div class="image-container">
+          <img src="nausea.jpg" alt="Nausea Remedies">
+        </div>
+        <h3>Nausea Remedies</h3>
+        <p>Drink ginger tea or suck on ginger candy to reduce nausea. Peppermint tea or sucking on a lemon wedge can also help alleviate the queasy feeling.</p>
+      </div>
+      <div class="remedy" data-keywords="acne pimples skin breakout oily skin blemishes">
+        <div class="image-container">
+          <img src="acne.jpg" alt="Acne Remedies">
+        </div>
+        <h3>Acne Remedies</h3>
+        <p>Apply tea tree oil or aloe vera gel to pimples. A honey and cinnamon mask can reduce inflammation and fight bacteria.</p>
+      </div>
+      <div class="remedy" data-keywords="fever chills high temperature body ache">
+        <div class="image-container">
+          <img src="fever.jpg" alt="Fever Remedies">
+        </div>
+        <h3>Fever Remedies</h3>
+        <p>Stay hydrated with water and electrolyte-rich drinks. Use a cool damp cloth to sponge the body. Avoid heavy blankets to allow heat to escape.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function filterRemedies() {
+      const searchValue = document.getElementById("search-box").value.toLowerCase();
+      const remedies = document.querySelectorAll(".remedy");
+  
+      remedies.forEach(remedy => {
+        const keywords = remedy.getAttribute("data-keywords");
+        if (searchValue === "all" || searchValue === "" || searchValue.trim() === "") {
+          
+          remedy.style.display = "block";
+        } else if (keywords.includes(searchValue)) {
+          
+          remedy.style.display = "block";
+        } else {
+          
+          remedy.style.display = "none";
+        }
+      });
+    }
+  </script>
+  
+</body>
+</html>
